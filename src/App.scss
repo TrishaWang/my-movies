@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/bootstrap";
+
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
+.movie-header {
+  @apply box-border w-screen shadow-md h-auto py-4 px-[9rem];
+  .header {
+    // box-shadow: rgba(0, 0, 0, 0.15) 0 0 2.6px;
+
+    @apply flex  items-center justify-between;
+  }
+
+  input {
+    @apply mr-[5rem] w-[40vw] py-[0.3rem] shadow-md;
+  }
+}
+.movie-app > .row {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
