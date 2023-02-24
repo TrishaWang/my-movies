@@ -4,18 +4,53 @@ $font-stack: Helvetica, sans-serif;
 $primary-color: #333;
 
 .movie-header {
-  @apply box-border w-screen shadow-md h-auto py-4 px-[9rem];
-  .header {
-    // box-shadow: rgba(0, 0, 0, 0.15) 0 0 2.6px;
+  box-sizing: border-box;
+  padding: 1rem 2rem;
 
-    @apply flex  items-center justify-between;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  // .header {
+  //   display: flex;
+  //   align-items: center;
+  // }
+
+  input:focus {
+    outline: none;
   }
-
-  input {
-    @apply mr-[5rem] w-[40vw] py-[0.3rem] shadow-md;
+  img {
+    width: 200px;
   }
 }
-.movie-app > .row {
-  overflow-x: auto;
-  flex-wrap: nowrap;
+.image-container {
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.image-container:hover {
+  cursor: pointer;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  transition: 0.5s ease;
+  opacity: 0;
+  font-size: 1.2rem;
+  padding: 2rem;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+.movie-app > {
+  .search-movie,
+  .favorite-movie {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
 }
