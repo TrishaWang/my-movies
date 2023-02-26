@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+const api_img = "https://image.tmdb.org/t/p/w500/";
 
 const MovieList = (props) => {
   const FavoriteComponent = props.favoritesComponents;
@@ -9,7 +10,7 @@ const MovieList = (props) => {
           key={id}
           className='image-container d-flex justify-content-start m-3'
         >
-          <img src={movie.Poster} alt='movie-poster' />
+          <img src={api_img + movie.poster_path} alt={movie.original_title} />
           <div
             onClick={() => props.handleFavoriteClick(movie)}
             className='overlay d-flex align-items-center justify-content-center'
