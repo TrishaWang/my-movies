@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
-import {} from "react-icons/bi";
 
 const api_img = "https://image.tmdb.org/t/p/w500/";
 
 const MovieList = (props) => {
   const FavoriteComponent = props.favoritesComponents;
+  const trendNum = props.trendNums;
 
   const slideLeft = () => {
     let slider = document.getElementById("slider");
     // console.log(slider);
     slider.scrollLeft = slider.scrollLeft + 500;
   };
-  // +props.RowID;
+
   const slideRight = () => {
     let slider = document.getElementById("slider");
     // let sliders = document.getElementById("slider").;
-    // console.log(slider);
+    console.log(slider);
     slider.scrollRight = slider.scrollRight - 500;
   };
   return (
@@ -24,7 +24,10 @@ const MovieList = (props) => {
       {props.movies.map((movie, id) => (
         <div className='movie-list-container'>
           {/* image-container */}
-          <div key={id} className='image-container justify-content-start'>
+          <div
+            key={id}
+            className='image-container d-flex justify-content-start'
+          >
             <img src={api_img + movie.poster_path} alt={movie.original_title} />
             <div
               onClick={() => props.handleFavoriteClick(movie)}
@@ -34,8 +37,8 @@ const MovieList = (props) => {
             </div>
           </div>
           {/* movie-list-title */}
-          <div className='movie-list-title '>
-            {/* <span >{id + 1}</span> */}
+          <div className='movie-list-title d-flex'>
+            {trendNum ? <span>{id + 1}</span> : <span></span>}
             <div>
               <h5>{movie.original_title}</h5>
               <p>{movie.release_date.slice(0, 4)}</p>

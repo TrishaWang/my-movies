@@ -64,14 +64,13 @@ h1 {
 
 .movie-container {
   margin: 3rem auto;
-  scrollbar-width: none;
 }
 
 .movie-container > {
   .movie-list {
     position: relative;
     overflow-x: scroll;
-    scrollbar-width: none;
+    // scrollbar-width: none;
     scroll-behavior: smooth;
     flex-wrap: nowrap;
 

@@ -1,8 +1,6 @@
 import logo from "./logo.svg";
 import "./App.scss";
 import MovieList from "./components/MovieList";
-import TrendingList from "./components/TrendingList";
-import UpcomingList from "./components/TrendingList";
 import react, { useEffect, useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
@@ -128,7 +126,6 @@ function App() {
         )}
         <div className='movie-list row' id='slider'>
           <MovieList
-            RowID='1'
             movies={movies}
             favourites={favourites}
             handleFavoriteClick={AddFavoriteMovie}
@@ -142,10 +139,10 @@ function App() {
           <MovieListHeading heading='Top 10 Trending' />
         </div>
         <div className='movie-list row' id='slider2'>
-          <TrendingList
-            RowID='2'
-            movies={trending}
+          <MovieList
+            movies={trending.filter((movies, id) => id <= 9)}
             favourites={favourites}
+            trendNums={true}
             handleFavoriteClick={AddFavoriteMovie}
             favoritesComponents={AddFavorites}
           />
