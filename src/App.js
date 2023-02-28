@@ -52,26 +52,26 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    // const SearchHeight =
-    //   SearchResultContainer.current.getBoundingClientRect().height;
-    // console.log(SearchHeight);
-    if (searchValue) {
-      SearchResultContainer.current.style.height = `auto`;
-      SearchResultContainer.current.style.maxHeight = `auto`;
-      SearchResultContainer.current.style.background = `#a68555`;
-      SearchResultContainer.current.style.transition = `all 10s ease-in`;
-      SearchResultContainer.current.style.top = `3px`;
+  // useEffect(() => {
+  //   // const SearchHeight =
+  //   //   SearchResultContainer.current.getBoundingClientRect().height;
+  //   // console.log(SearchHeight);
+  //   if (searchValue) {
+  //     SearchResultContainer.current.style.height = `auto`;
+  //     SearchResultContainer.current.style.maxHeight = `auto`;
+  //     SearchResultContainer.current.style.background = `#a68555`;
+  //     SearchResultContainer.current.style.transition = `all 10s ease-in`;
+  //     SearchResultContainer.current.style.top = `3px`;
 
-      console.log(SearchResultContainer.current.style);
-    } else {
-      SearchResultContainer.current.style.height = `0px`;
-      SearchResultContainer.current.style.top = `0`;
-      // SearchResultContainer.current.style.maxHeight = `0px`;
-      SearchResultContainer.current.style.transition = `none`;
-      SearchResultContainer.current.style.background = `none`;
-    }
-  }, [searchValue]);
+  //     console.log(SearchResultContainer.current.style);
+  //   } else {
+  //     SearchResultContainer.current.style.height = `0px`;
+  //     SearchResultContainer.current.style.top = `0`;
+  //     // SearchResultContainer.current.style.maxHeight = `0px`;
+  //     SearchResultContainer.current.style.transition = `none`;
+  //     SearchResultContainer.current.style.background = `none`;
+  //   }
+  // }, [searchValue]);
 
   useEffect(() => {
     getMovieRequest(searchValue);
@@ -116,14 +116,19 @@ function App() {
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       {/* Search Result */}
-      <div ref={SearchResultContainer} className='search-result-container'>
+
+      <div
+        ref={SearchResultContainer}
+        className='movie-container search-result-container'
+      >
         {searchValue && (
           <div className='row d-flex align-items-center'>
             <MovieListHeading heading='Search Results' />
           </div>
         )}
-        <div className='movie-list row'>
+        <div className='movie-list row' id='slider'>
           <MovieList
+            RowID='1'
             movies={movies}
             favourites={favourites}
             handleFavoriteClick={AddFavoriteMovie}
@@ -132,16 +137,19 @@ function App() {
         </div>
       </div>
       {/* Top 10 Trending */}
-      <div className='row d-flex align-items-center'>
-        <MovieListHeading heading='Top 10 Trending' />
-      </div>
-      <div className='movie-list row'>
-        <TrendingList
-          movies={trending}
-          favourites={favourites}
-          handleFavoriteClick={AddFavoriteMovie}
-          favoritesComponents={AddFavorites}
-        />
+      <div className='movie-container'>
+        <div className='row d-flex align-items-center'>
+          <MovieListHeading heading='Top 10 Trending' />
+        </div>
+        <div className='movie-list row' id='slider2'>
+          <TrendingList
+            RowID='2'
+            movies={trending}
+            favourites={favourites}
+            handleFavoriteClick={AddFavoriteMovie}
+            favoritesComponents={AddFavorites}
+          />
+        </div>
       </div>
       {/* Upcoming
       <div className='row d-flex align-items-center'>
@@ -156,16 +164,17 @@ function App() {
         />
       </div> */}
       {/* Favorite */}
-
-      <div className='row d-flex align-items-center'>
-        <MovieListHeading heading='Favourites' />
-      </div>
-      <div className='favorite-movie row'>
-        <MovieList
-          movies={favourites}
-          handleFavoriteClick={RemoveFavoriteMovie}
-          favoritesComponents={RemoveFavourites}
-        />
+      <div className='movie-container'>
+        <div className='row d-flex align-items-center'>
+          <MovieListHeading heading='Favourites' />
+        </div>
+        <div className='favorite-list row'>
+          <MovieList
+            movies={favourites}
+            handleFavoriteClick={RemoveFavoriteMovie}
+            favoritesComponents={RemoveFavourites}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,13 @@
+#Todo
+
+- Update add favorites & remove favorites
+- Add right click scroll
+- Remove scroll bar
+- Movie details
+- Search results animation\*
+- Movie stars
+<!-- - Movie title -->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
