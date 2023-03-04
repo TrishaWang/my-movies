@@ -5,7 +5,7 @@
 - Remove scroll bar
 - Movie details
 - Search results animation\*
-- Movie stars
+- Movie stars *
 <!-- - Movie title -->
 
 # Getting Started with Create React App

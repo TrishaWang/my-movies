@@ -15,7 +15,7 @@ $primary-color-7: #9a9a9a;
 $primary-color-8: #c3c3c3;
 
 .movie-app {
-  max-width: 85vw;
+  max-width: 80vw;
 }
 .movie-header {
   box-sizing: border-box;
@@ -63,29 +63,26 @@ h1 {
 }
 
 .movie-container {
-  margin: 3rem auto;
+  margin: 2rem auto;
 }
-
-.movie-container > {
+.movie-list-container{
+  position: relative;
+}
+.movie-list-container > {
   .movie-list {
     position: relative;
-    overflow-x: scroll;
-    // scrollbar-width: none;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     flex-wrap: nowrap;
-
+  }
     .favorite-list {
       flex-wrap: wrap;
       display: flex;
 
-      // margin: 0 auto;
     }
 
-    // scrollbar-width: none;
-    // -ms-overflow-style: none;
-  }
 }
-.movie-list-container {
+.movie-poster {
   width: 250px;
   margin: 1rem;
 }
@@ -95,7 +92,6 @@ h1 {
   transition: transform 0.3s;
   border-radius: 3%;
   display: relative;
-  // width: max-content;
   img {
     width: 250px;
     border-radius: 3%;
@@ -130,119 +126,122 @@ h1 {
   color: white;
 }
 
-// .search-result-container {
-//   top: 0;
-//   height: auto;
-//   // background-color: #a68555;
-//   transition: all 10s;
-// }
 
-// .favorite-movie ::-webkit-scrollbar {
-//   display: none; /* Safari and Chrome */
-// }
 
 // right button
-.movie-list:hover .button-right {
+.movie-list-container:hover .button-right {
+    transition: all 0.4s ease;
+    opacity: 1;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.6)
+      );
+    }
+    
+    .movie-list-container:hover .button-right-icon {
+        transition: all 0.4s ease;
+        opacity: 1;
+        transform: scaleY(1.2);
+      }
+      .button-right {
+        position: absolute;
+        // position: sticky;
+        right: 0;
+        top:0;
+        margin-right: -1rem;
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.35)
+          );
+          height: 400px;
+           width: 4.8rem;
+        }
+        .button-right-icon {
+          opacity: 0;
+          color: rgb(42, 42, 42);
+          transform: scaleY(0.8);
+          height: 100%;
+          width: inherit;
+        }
+        // right button end
+        
+        // left button
+.movie-list-container:hover .button-left {
   transition: all 0.4s ease;
   opacity: 1;
   background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.7)
-  );
-}
-
-.movie-list:hover .button-right-icon {
-  transition: all 0.4s ease;
-  opacity: 1;
-  transform: scaleY(1.2);
-}
-.button-right {
-  position: absolute;
-  // position: sticky;
-  right: 0;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.5)
-  );
-  padding-right: 0.5rem;
-  height: 25rem;
-  width: 4.8rem;
-}
-.button-right-icon {
-  opacity: 0;
-  color: rgb(42, 42, 42);
-  transform: scaleY(0.8);
-  height: inherit;
-  width: inherit;
-}
-// right button end
-
-// left button
-.movie-list:hover .button-left {
-  transition: all 0.4s ease;
-  opacity: 1;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0)
-  );
-}
-
-.movie-list:hover .button-left-icon {
-  transition: all 0.4s ease;
-  opacity: 1;
-  transform: scaleY(1.2);
-}
-.button-left {
-  position: absolute;
-  // position: sticky;
-  left: 0;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0)
-  );
-  padding-left: 0.5rem;
-  height: 25rem;
-  width: 4.8rem;
-}
-.button-left-icon {
-  opacity: 0;
-  color: rgb(42, 42, 42);
-  transform: scaleY(0.8);
-  height: inherit;
-  width: inherit;
-}
-// left button end
-
-.movie-list-title {
-  margin: 0.7rem;
-  margin-top: 1.5rem;
-  font-family: DM sans, sans-serif;
-  h5 {
-    font-size: 1.2rem;
-    font-style: normal;
-    // letter-spacing: 0px;
-    font-weight: 600;
-    color: $primary-color-6;
-    word-wrap: break-word;
+      to right,
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0)
+    );
   }
-  p {
-    margin-top: -0.2rem;
-    padding-left: 0.1rem;
-
-    color: $primary-color-7;
-    font-weight: 600;
-    font-size: 0.8rem;
-  }
-  span {
-    font-family: $font-stack-DMsans;
-    color: $primary-color-8;
-    font-weight: 700;
-    font-size: 4.5rem;
-    line-height: 0.8;
-    margin-right: 0.8rem;
-  }
-}
+  
+  .movie-list-container:hover .button-left-icon {
+      transition: all 0.4s ease;
+      opacity: 1;
+      transform: scaleY(1.2);
+    }
+    .button-left {
+      position: absolute;
+      // position: sticky;
+      left: 0;
+      top:0;
+       margin-left: -1rem;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.35),
+        rgba(255, 255, 255, 0)
+        );
+        height: 400px;
+         width: 4.8rem;
+      }
+      .button-left-icon {
+        opacity: 0;
+        color: rgb(42, 42, 42);
+        transform: scaleY(0.8);
+        height: 100%;
+        width: inherit;
+      }
+      // left button end
+            
+            .movie-title {
+              margin: 0.7rem;
+              margin-top: 1.5rem;
+              font-family: DM sans, sans-serif;
+              h5 {
+                font-size: 1.2rem;
+                font-style: normal;
+                // letter-spacing: 0px;
+                font-weight: 600;
+                color: $primary-color-6;
+                word-wrap: break-word;
+              }
+              p {
+                margin-top: -0.2rem;
+                padding-left: 0.1rem;
+                
+                color: $primary-color-7;
+                font-weight: 600;
+                font-size: 0.8rem;
+              }
+              span {
+                font-family: $font-stack-DMsans;
+                color: $primary-color-8;
+                font-weight: 700;
+                font-size: 4.5rem;
+                line-height: 0.8;
+                margin-right: 0.8rem;
+              }
+            }
+            
+            // .search-result-container {
+            //   top: 0;
+            //   height: auto;
+            //   // background-color: #a68555;
+            //   transition: all 10s;
+            // }
+            // .favorite-movie ::-webkit-scrollbar {
+            //   display: none; /* Safari and Chrome */
+            // }

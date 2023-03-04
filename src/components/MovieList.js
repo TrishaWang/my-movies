@@ -6,38 +6,44 @@ const api_img = "https://image.tmdb.org/t/p/w500/";
 const MovieList = (props) => {
   const FavoriteComponent = props.favoritesComponents;
   const trendNum = props.trendNums;
+  const rowId=props.rowId
 
   const slideLeft = () => {
-    let slider = document.getElementById("slider");
+    let slider = document.getElementById(`slider ${rowId}`);
     // console.log(slider);
-    slider.scrollLeft = slider.scrollLeft + 500;
+    slider.scrollLeft = slider.scrollLeft - 1120;
   };
 
   const slideRight = () => {
-    let slider = document.getElementById("slider");
+    let slider = document.getElementById(`slider ${rowId}`);
     // let sliders = document.getElementById("slider").;
-    console.log(slider);
-    slider.scrollRight = slider.scrollRight - 500;
+    console.log(slider.scrollLeft);
+    slider.scrollLeft = slider.scrollLeft + 1120;
   };
   return (
     <>
+    <div className="movie-list-container">
+
+      
+    <div className='movie-list row' id={`slider ${rowId}`}>
+
       {props.movies.map((movie, id) => (
-        <div className='movie-list-container'>
+        <div className='movie-poster'>
           {/* image-container */}
           <div
             key={id}
             className='image-container d-flex justify-content-start'
-          >
+            >
             <img src={api_img + movie.poster_path} alt={movie.original_title} />
             <div
               onClick={() => props.handleFavoriteClick(movie)}
               className='overlay d-flex align-items-center justify-content-center'
-            >
+              >
               <FavoriteComponent />
             </div>
           </div>
-          {/* movie-list-title */}
-          <div className='movie-list-title d-flex'>
+          {/* movie-title */}
+          <div className='movie-title d-flex'>
             {trendNum ? <span>{id + 1}</span> : <span></span>}
             <div>
               <h5>{movie.original_title}</h5>
@@ -46,26 +52,14 @@ const MovieList = (props) => {
           </div>
         </div>
       ))}
-      <div className='button-left' onClick={slideLeft}>
+    </div>
+    <div className='button-left' onClick={slideLeft}>
         <BiChevronLeft className='button-left-icon' />
       </div>
       <div className='button-right' onClick={slideRight}>
         <BiChevronRight className='button-right-icon' />
       </div>
-
-      {/* <svg
-        className='button-right'
-        xmlns='http://www.w3.org/2000/svg'
-        fill='currentColor'
-        class='bi bi-chevron-right button-right'
-        viewBox='0 0 16 16'
-      >
-        <path
-          class='button-right-path'
-          fill-rule='evenodd'
-          d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
-        />
-      </svg> */}
+      </div>
     </>
   );
 };

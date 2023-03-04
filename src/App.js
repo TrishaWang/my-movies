@@ -9,6 +9,7 @@ import SearchBox from "./components/SearchBox";
 import AddFavorites from "./components/AddFavorites";
 import MovieHeading from "./components/MovieHeading";
 import RemoveFavourites from "./components/RemoveFavourites";
+import MovieSearchTrendList from "./components/MovieSearchTrendList";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -110,43 +111,35 @@ function App() {
       {/* movie body */}
       <div className='movie-header row d-flex align-items-center'>
         <MovieHeading />
-
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       {/* Search Result */}
-
       <div
         ref={SearchResultContainer}
         className='movie-container search-result-container'
       >
         {searchValue && (
-          <div className='row d-flex align-items-center'>
             <MovieListHeading heading='Search Results' />
-          </div>
         )}
-        <div className='movie-list row' id='slider'>
           <MovieList
             movies={movies}
             favourites={favourites}
+            rowId="1"
             handleFavoriteClick={AddFavoriteMovie}
             favoritesComponents={AddFavorites}
           />
-        </div>
       </div>
       {/* Top 10 Trending */}
       <div className='movie-container'>
-        <div className='row d-flex align-items-center'>
           <MovieListHeading heading='Top 10 Trending' />
-        </div>
-        <div className='movie-list row' id='slider2'>
           <MovieList
             movies={trending.filter((movies, id) => id <= 9)}
             favourites={favourites}
+            rowId="2"
             trendNums={true}
             handleFavoriteClick={AddFavoriteMovie}
             favoritesComponents={AddFavorites}
           />
-        </div>
       </div>
       {/* Upcoming
       <div className='row d-flex align-items-center'>
@@ -162,9 +155,7 @@ function App() {
       </div> */}
       {/* Favorite */}
       <div className='movie-container'>
-        <div className='row d-flex align-items-center'>
           <MovieListHeading heading='Favourites' />
-        </div>
         <div className='favorite-list row'>
           <MovieList
             movies={favourites}
