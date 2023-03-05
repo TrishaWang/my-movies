@@ -15,25 +15,28 @@ $primary-color-7: #9a9a9a;
 $primary-color-8: #c3c3c3;
 
 .movie-app {
-  max-width: 80vw;
+  max-width: 85vw;
 }
 .movie-header {
   box-sizing: border-box;
-  padding: 1rem 8rem;
-  // background-color: red;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 4rem 2rem 1rem;
+  border-bottom: 2px solid #8b9297;
+  flex-wrap: wrap;
+  display: flex;
+  // // background-color: red;
+  // box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  //   0 2px 4px -1px rgba(0, 0, 0, 0.06);
   // flex: auto;
   // justify-content: space-around;
   input {
     background-color: $primary-color-2;
     font-family: $font-stack-Montserrat;
-    font-size: smaller;
+    // font-size: small;
     background-color: $primary-color-2;
     border-width: 0.5px;
     border-color: $primary-color-3;
     color: $primary-color-5;
-    min-width: 200px;
+    min-width: 14rem;
     &::placeholder {
       color: $primary-color-4;
     }
