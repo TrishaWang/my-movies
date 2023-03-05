@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 
-const api_img = "https://image.tmdb.org/t/p/w500/";
+import Movie from "./Movie";
+
 
 const MovieList = (props) => {
+
   const FavoriteComponent = props.favoritesComponents;
   const trendNum = props.trendNums;
-  const rowId=props.rowId
+  const handleFavoriteClick= props.handleFavoriteClick;
+
+  const rowId=props.rowId;
 
   const slideLeft = () => {
     let slider = document.getElementById(`slider ${rowId}`);
@@ -17,7 +21,6 @@ const MovieList = (props) => {
   const slideRight = () => {
     let slider = document.getElementById(`slider ${rowId}`);
     // let sliders = document.getElementById("slider").;
-    console.log(slider.scrollLeft);
     slider.scrollLeft = slider.scrollLeft + 1120;
   };
   return (
@@ -28,29 +31,7 @@ const MovieList = (props) => {
     <div className='movie-list row' id={`slider ${rowId}`}>
 
       {props.movies.map((movie, id) => (
-        <div className='movie-poster'>
-          {/* image-container */}
-          <div
-            key={id}
-            className='image-container d-flex justify-content-start'
-            >
-            <img src={api_img + movie.poster_path} alt={movie.original_title} />
-            <div
-              onClick={() => props.handleFavoriteClick(movie)}
-              className='overlay d-flex align-items-center justify-content-center'
-              >
-              <FavoriteComponent />
-            </div>
-          </div>
-          {/* movie-title */}
-          <div className='movie-title d-flex'>
-            {trendNum ? <span>{id + 1}</span> : <span></span>}
-            <div>
-              <h5>{movie.original_title}</h5>
-              <p>{movie.release_date.slice(0, 4)}</p>
-            </div>
-          </div>
-        </div>
+        <Movie movie={movie} key={id} id={id} FavoriteComponent={FavoriteComponent} trendNum={trendNum} handleFavoriteClick={handleFavoriteClick}/>
       ))}
     </div>
     <div className='button-left' onClick={slideLeft}>

@@ -7,8 +7,8 @@ import { Button } from "react-bootstrap";
 import MovieListHeading from "./components/MovieListHeading";
 import SearchBox from "./components/SearchBox";
 import AddFavorites from "./components/AddFavorites";
-import MovieHeading from "./components/MovieHeading";
 import RemoveFavourites from "./components/RemoveFavourites";
+import MovieHeading from "./components/MovieHeading";
 import MovieSearchTrendList from "./components/MovieSearchTrendList";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
   const [favourites, setFavourites] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const SearchResultContainer = useRef(null);
+
 
   const getMovieRequest = async (searchValue) => {
     const url = `https://api.themoviedb.org/3/search/movie?api_key=937c84a48d4896f7cc0b7b27855cfc86&language=en-US&page=1&include_adult=false&query=${searchValue}`;
@@ -77,35 +78,44 @@ function App() {
   }, [searchValue]);
 
   useEffect(() => {
+    
     const movieFavourites = JSON.parse(
       localStorage.getItem("react-movie-favourites")
     );
-    setFavourites(movieFavourites);
-  }, []);
 
-  useEffect(() => {
+    if (!movieFavourites){
+      localStorage.setItem("react-movie-favourites", JSON.stringify([]));
+    } 
+    setFavourites(movieFavourites);
     getTrendingMovieRequest();
     getRecentMovieRequest();
   }, []);
+
+
 
   const saveToLocalStorage = (items) => {
     localStorage.setItem("react-movie-favourites", JSON.stringify(items));
   };
 
-  const AddFavoriteMovie = (movie) => {
-    const newFavoriteList = [...favourites, movie];
-    setFavourites(newFavoriteList);
-    saveToLocalStorage(newFavoriteList);
-  };
+  const FavoriteMovie = (movie) => {
+    console.log("app",movie.isfav)
+    if (movie.isfav){
+      // console.log(movie.isfav)
+        const newFavoriteList = [...favourites, movie];
+        setFavourites(newFavoriteList);
+        saveToLocalStorage(newFavoriteList)
+    }else if (!movie.isfav){ 
+      const newFavoriteList = favourites.filter(
+        (favorite) => favorite.id !== movie.id
+        );
+        setFavourites(newFavoriteList);
+        saveToLocalStorage(newFavoriteList);
+      }
+    
+  
+  }
 
-  const RemoveFavoriteMovie = (movie) => {
-    const newFavoriteList = favourites.filter(
-      (favorite) => favorite.id !== movie.id
-    );
-    setFavourites(newFavoriteList);
-    saveToLocalStorage(newFavoriteList);
-  };
-
+  
   return (
     <div className='movie-app container-fluid'>
       {/* movie body */}
@@ -125,8 +135,7 @@ function App() {
             movies={movies}
             favourites={favourites}
             rowId="1"
-            handleFavoriteClick={AddFavoriteMovie}
-            favoritesComponents={AddFavorites}
+            handleFavoriteClick={FavoriteMovie}
           />
       </div>
       {/* Top 10 Trending */}
@@ -137,30 +146,18 @@ function App() {
             favourites={favourites}
             rowId="2"
             trendNums={true}
-            handleFavoriteClick={AddFavoriteMovie}
-            favoritesComponents={AddFavorites}
+            handleFavoriteClick={FavoriteMovie}
+
           />
       </div>
-      {/* Upcoming
-      <div className='row d-flex align-items-center'>
-        <MovieListHeading heading='Upcoming Movies' />
-      </div>
-      <div className='movie-list row'>
-        <UpcomingList
-          movies={upcoming}
-          favourites={favourites}
-          handleFavoriteClick={AddFavoriteMovie}
-          favoritesComponents={AddFavorites}
-        />
-      </div> */}
       {/* Favorite */}
       <div className='movie-container'>
           <MovieListHeading heading='Favourites' />
         <div className='favorite-list row'>
           <MovieList
             movies={favourites}
-            handleFavoriteClick={RemoveFavoriteMovie}
-            favoritesComponents={RemoveFavourites}
+            handleFavoriteClick={FavoriteMovie}
+
           />
         </div>
       </div>
