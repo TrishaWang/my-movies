@@ -1,9 +1,12 @@
 import React from "react";
+import MovieLogo from "./components/MovieLogo";
+import SearchBox from "./components/SearchBox";
 
 const MovieHeading = () => {
   return (
-    <div className='col'>
-      <img alt='movie-app-logo' src='../img/movie-app-logo.png' />
+    <div className='movie-header row d-flex align-items-center'>
+      <MovieLogo />
+      <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
     </div>
   );
 };

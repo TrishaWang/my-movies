@@ -1,11 +1,15 @@
 #Todo
 
+- store api urls
+- get and set favorites in json server
+- learn constructor (this.)
+- finish coding addict lesson
 - Update add favorites & remove favorites
-- Add right click scroll
-- Remove scroll bar
+  <!-- - Add right click scroll -->
+  <!-- - Remove scroll bar -->
 - Movie details
 - Search results animation\*
-- Movie stars *
+- Movie stars \*
 <!-- - Movie title -->
 
 # Getting Started with Create React App
