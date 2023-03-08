@@ -12,6 +12,22 @@
 - Movie stars \*
 <!-- - Movie title -->
 
+
+API 
+-> search
+-> trending 
+-> favourites
+
+-> movie.js 
+// favourites is added
+// if movie id is in json {
+check favourite status,
+and get favourite status
+}
+//else if movie id is not in json set favourite to false.
+
+JSON server
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
