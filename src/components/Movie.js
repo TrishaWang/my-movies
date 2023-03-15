@@ -8,7 +8,9 @@ const Movie = ({
   id,
   trendNum,
   FavoriteComponent,
+  favourites,
   handleFavoriteClick,
+  favoriteStatus,
 }) => {
   // const [fav, setFav] = useState(false);
 
@@ -36,7 +38,23 @@ const Movie = ({
   //movie.isfav = fav;
   //console.log("3", movie.isfav);
   // };
+  // console.log("moviename", movie, favourites);
+  // const favoriteStatus = (favourites, movie) => {
+  //   if (favourites.length !== 0 && movie.length !== 0) {
+  //     console.log(favourites, movie);
+  //     if (favourites && favourites.length !== 0) {
+  //       favourites.some((x) => {
+  //         if (x.id === movie.id) {
+  //           // console.log(true, x, movie);
 
+  //           return "true";
+  //         }
+  //         // console.log(false, x, movie);
+  //         return "false";
+  //       });
+  //     }
+  //   }
+  // };
   return (
     <div className='movie-poster'>
       {/* image-container */}
@@ -44,18 +62,15 @@ const Movie = ({
         <img src={api_img + movie.poster_path} alt={movie.original_title} />
         <div
           onClick={() => {
-            //check if movie id is in favourite already
-            // if yes means favourite is === true
-            //
-            // if (favourites) movie.favourite = !movie.favourite;
-            // console.log(movie);
-            // console.log(movie.isfav);
             handleFavoriteClick(movie);
             return;
           }}
           className='overlay d-flex align-items-center justify-content-center'
         >
-          {movie.favourite ? <RemoveFavourites /> : <AddFavorites />}
+          {/* {favorite_status() ? <RemoveFavourites /> : <AddFavorites />} */}
+          {favoriteStatus(favourites, movie)
+            ? favoriteStatus(favourites, movie)
+            : favoriteStatus(favourites, movie)}
         </div>
       </div>
       {/* movie-title */}

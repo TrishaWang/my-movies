@@ -12,14 +12,13 @@
 - Movie stars \*
 <!-- - Movie title -->
 
-
-API 
+API
 -> search
--> trending 
+-> trending
 -> favourites
 
--> movie.js 
-// favourites is added
+-> movie.js // add here favourites
+
 // if movie id is in json {
 check favourite status,
 and get favourite status

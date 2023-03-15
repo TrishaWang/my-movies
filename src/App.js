@@ -4,7 +4,7 @@ import MovieList from "./components/MovieList";
 import react, { useEffect, useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MovieListHeading from "./components/MovieListHeading";
-import MovieHeading from "./components/MovieLogo";
+import MovieHeading from "./components/MovieHeading";
 import MovieSearchTrendList from "./components/MovieSearchTrendList";
 
 function App() {
@@ -29,12 +29,16 @@ function App() {
   const fetchFavourite = async () => {
     const response = await fetch("http://localhost:3000/favourite_movies");
     const data = await response.json();
+
+    if (data) {
+      setFavourites(data);
+    }
   };
   //add Favorite
   const addFavourites = async (movie) => {
     const newMovieObject = {
       id: movie.id,
-      favorite: movie.favourite,
+      favourite: movie.favourite,
       release_date: movie.release_date,
       poster_path: movie.poster_path,
       original_title: movie.original_title,
@@ -47,12 +51,6 @@ function App() {
       },
       body: JSON.stringify(newMovieObject),
     });
-
-    const data = await response.json();
-    console.log(movie);
-
-    const newFavouriteList = [...favourites, newMovieObject];
-    setFavourites(newFavouriteList);
   };
 
   //delete Favorite
@@ -68,7 +66,6 @@ function App() {
     const newFavouriteList = favourites.filter(
       (favourite) => favourite.id !== movie.id
     );
-    //check status, then change state depending on status
     response.status === 200
       ? setFavourites(newFavouriteList)
       : alert("Error Deleting This Favourite");
@@ -96,84 +93,35 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //   // const SearchHeight =
-  //   //   SearchResultContainer.current.getBoundingClientRect().height;
-  //   // console.log(SearchHeight);
-  //   if (searchValue) {
-  //     SearchResultContainer.current.style.height = `auto`;
-  //     SearchResultContainer.current.style.maxHeight = `auto`;
-  //     SearchResultContainer.current.style.background = `#a68555`;
-  //     SearchResultContainer.current.style.transition = `all 10s ease-in`;
-  //     SearchResultContainer.current.style.top = `3px`;
-
-  //     console.log(SearchResultContainer.current.style);
-  //   } else {
-  //     SearchResultContainer.current.style.height = `0px`;
-  //     SearchResultContainer.current.style.top = `0`;
-  //     // SearchResultContainer.current.style.maxHeight = `0px`;
-  //     SearchResultContainer.current.style.transition = `none`;
-  //     SearchResultContainer.current.style.background = `none`;
-  //   }
-  // }, [searchValue]);
-
   useEffect(() => {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
   useEffect(() => {
-    // const movieFavourites = JSON.parse(
-    //   localStorage.getItem("react-movie-favourites")
-    // );
-    // console.log(fetchFavourite());
-    // const movieFavourites = JSON.parse(;
-
-    // if (!movieFavourites) {
-    //   localStorage.setItem("react-movie-favourites", JSON.stringify([]));
-    // }
-    // setFavourites();
+    fetchFavourite();
     getTrendingMovieRequest();
-    // getRecentMovieRequest();
   }, []);
 
-  // const saveToLocalStorage = (items) => {
-  //   localStorage.setItem("react-movie-favourites", JSON.stringify(items));
-  // };
-
-  // const FavoriteMovie = (movie) => {
-  //   //console.log("app",movie.isfav)
-  //   if (movie.isfav) {
-  //     // console.log(movie.isfav)
-  //     const newFavoriteList = [...favourites, movie];
-  //     setFavourites(newFavoriteList);
-  //     saveToLocalStorage(newFavoriteList);
-  //   } else if (!movie.isfav) {
-  //     const newFavoriteList = favourites.filter(
-  //       (favorite) => favorite.id !== movie.id
-  //     );
-  //     setFavourites(newFavoriteList);
-  //     saveToLocalStorage(newFavoriteList);
-  //   }
-  // };
+  // useEffect(() => {
+  //   fetchFavourite();
+  // }, [favourites]);
 
   const FavoriteMovie = (movie) => {
-    console.log(movie);
-    movie.favourite = !movie.favourite;
-    console.log(movie);
-    if (movie.favourite) {
-      console.log("true", movie.favourite);
-      addFavourites(movie);
-      // console.log(movie);
-    } else if (!movie.favourite) {
-      console.log("false", movie.favourite);
-      removeFavourites(movie);
-    }
+    //   movie.favourite = !movie.favourite;
+    //   console.log("true", movie.favourite);
+    //   if (movie.favourite) {
+    //     console.log("true", movie.favourite);
+    //     addFavourites(movie);
+    //   } else if (!movie.favourite) {
+    //     console.log("false", movie.favourite);
+    //     removeFavourites(movie);
+    //   }
   };
 
   return (
     <div className='movie-app container-fluid'>
-      <MovieHeading />
-      <div
+      <MovieHeading searchValue={searchValue} setSearchValue={setSearchValue} />
+      {/* <div
         ref={SearchResultContainer}
         className='movie-container search-result-container'
       >
@@ -184,25 +132,25 @@ function App() {
           rowId='1'
           handleFavoriteClick={FavoriteMovie}
         />
-      </div>
+      </div> */}
       {/* Top 10 Trending */}
       <div className='movie-container'>
         <MovieListHeading heading='Top 10 Trending' />
         <MovieList
-          movies={trending.filter((movies, id) => id <= 9)}
           favourites={favourites}
+          movies={trending.filter((movies, id) => id <= 9)}
           rowId='2'
           trendNums={true}
           handleFavoriteClick={FavoriteMovie}
         />
       </div>
       {/* Favorite */}
-      <div className='movie-container'>
+      {/* <div className='movie-container'>
         <MovieListHeading heading='Favourites' />
         <div className='favorite-list row'>
           <MovieList movies={favourites} handleFavoriteClick={FavoriteMovie} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

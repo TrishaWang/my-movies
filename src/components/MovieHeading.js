@@ -1,8 +1,11 @@
 import React from "react";
-import MovieLogo from "./components/MovieLogo";
-import SearchBox from "./components/SearchBox";
+import MovieLogo from "./MovieLogo";
+import SearchBox from "./SearchBox";
 
-const MovieHeading = () => {
+const MovieHeading = (props) => {
+  const searchValue = props.searchValue;
+  const setSearchValue = props.setSearchValue;
+
   return (
     <div className='movie-header row d-flex align-items-center'>
       <MovieLogo />
